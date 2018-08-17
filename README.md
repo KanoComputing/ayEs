@@ -93,9 +93,9 @@ Load them with [`env('.env.keys')`](https://www.npmjs.com/package/node-env-file)
 ```js
 const ayEs = require('ayes');
 const Auth = ayes.Auth;
-const auth = new Auth(process.env.JWT_SECRET, process.env.JWT_PUBLIC);
+const auth = new Auth(process.env.JWT_SECRET);
 // Or use the factory function
-const auth = ayEs.returnAuthInstance(process.env.JWT_SECRET, process.env.JWT_PUBLIC);
+const auth = ayEs.returnAuthInstance(process.env.JWT_SECRET;
 const routerOptions = {
   routes: [
     {
