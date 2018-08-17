@@ -76,16 +76,30 @@ Okay, but so far this is just a wrapper for the `Express#Router`. It gives us a 
 
 ## Auth
 ayEs provides an implementation of authentication by [JWT](https://jwt.io/) through the `Auth` lib. If an endpoint or a set of endpoints grouped into a router instance requires authentication, create and instance of the `ayEs#Auth` handler and pass it to the route configuration.
+
+### generate keys
+```bash
+openssl ecparam -name secp256r1 -genkey -out private.pem &&
+openssl ec -in private.pem -pubout -out public.pem &&\
+echo "JWT_SECRET='`cat ./private.pem`'" > .env.keys &&\
+echo "JWT_PUBLIC='`cat ./public.pem`'" >> .env.keys &&\
+rm private.pem &&\
+rm public.pem &&\
+cat .env.keys
+```
+Load them with [`env('.env.keys')`](https://www.npmjs.com/package/node-env-file)
+
+
 ```js
 const ayEs = require('ayes');
 const Auth = ayes.Auth;
 const auth = new Auth(process.env.JWT_SECRET);
 // Or use the factory function
-const auth = ayEs.returnAuthInstance(process.env.JWT_SECRET);
+const auth = ayEs.returnAuthInstance(process.env.JWT_SECRET;
 const routerOptions = {
   routes: [
     {
-      auth: auth, //Pass the auth instance here to authenticate just the /me endpoint.
+      auth, //Pass the auth instance here to authenticate just the /me endpoint.
       method: 'post',
       path: '/me',
       mwares: getMe //A controller function
