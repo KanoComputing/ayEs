@@ -20,7 +20,6 @@ module.exports = {
         'no-multi-assign':0,
         'no-restricted-syntax':0,
         'guard-for-in':0,
-        'no-tabs': 0,
         'no-restricted-properties':0,
         'guard-for-in':0,
         'no-tabs': 0,
